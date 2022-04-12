@@ -16,7 +16,7 @@ services:
     environment:
       DATABASE_URL: postgresql://steem:steem@db:5432/hivedb
       LOG_LEVEL: INFO
-      STEEMD_URL: http://localhost:8091
+      STEEMD_URL: https://your.steemapi.url
       SYNC_SERVICE: 1
     ports:
       - 8888:8080
