@@ -1,0 +1,25 @@
+version: "3"
+services:
+  db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: steem
+      POSTGRES_PASSWORD: steem
+      POSTGRES_DB: hivedb
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    restart: always
+  hive:
+    depends_on:
+      - db
+    image: steemit/hivemind
+    environment:
+      DATABASE_URL: postgresql://steem:steem@db:5432/hivedb
+      LOG_LEVEL: INFO
+      STEEMD_URL: http://localhost:8091
+      SYNC_SERVICE: 1
+    ports:
+      - 8888:8080
+    links:
+      - db:db
+    restart: always
