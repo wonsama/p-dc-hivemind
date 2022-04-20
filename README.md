@@ -33,6 +33,22 @@ checkpoint_timeout = 30min
 max_wal_size = 4GB
 ```
 
+## adminer 추가 및 삭제
+
+adminer : 손쉽게 db를 확인/조작할 수 있도록 도와주는 web app
+
+```yml
+adminer:
+  image: adminer
+  restart: always
+  ports:
+    - 7777:8080
+```
+
+adminer 를 yml 에 추가 이후 삭제하는 경우 `WARNING: Found orphan containers ...` 이런 메시지가 출력되는데 이런 경우 컨테이너 종료 시 아래와 같이 입력하면 컨테이너에서 존재하지 않는 service 는 제거 해줘서 다음부터는 경고 메시지가 출력되지 않는다.
+
+`docker-compose down --remove-orphans`
+
 ## reference
 
 - [hivemind 搭建教程](https://steemit.com/cn/@ety001/hivemind)
